@@ -1,16 +1,4 @@
 require('dotenv').config();
-const fs = require('fs');
-const { Buffer } = require('buffer');
-
-const base64Key = process.env.GOOGLE_SERVICE_KEY_BASE64;
-
-if (!base64Key) {
-  console.error('❌ GOOGLE_SERVICE_KEY_BASE64 environment variable is missing');
-  process.exit(1); // Stop the app immediately
-}
-
-const serviceAccountBuffer = Buffer.from(base64Key, 'base64');
-fs.writeFileSync('service-account.json', serviceAccountBuffer);
 const express = require('express');
 const bodyParser = require('body-parser');
 const axios = require('axios');
@@ -20,11 +8,17 @@ const dayjs = require('dayjs');
 const app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
 
-// Google Drive setup
+// Google Drive folder ID
 const folderId = '1FIu0Gyoy7Prb09QaV2iaSqhWx0kxSAqa';
-const serviceAccount = JSON.parse(
-  Buffer.from(process.env.GOOGLE_SERVICE_ACCOUNT_KEY, 'base64').toString('utf8')
-);
+
+// Decode and parse Google service account JSON from base64 env var
+const base64Key = process.env.GOOGLE_SERVICE_KEY_BASE64;
+if (!base64Key) {
+  console.error('❌ GOOGLE_SERVICE_KEY_BASE64 environment variable is missing');
+  process.exit(1);
+}
+
+const serviceAccount = JSON.parse(Buffer.from(base64Key, 'base64').toString('utf8'));
 
 const auth = new google.auth.GoogleAuth({
   credentials: serviceAccount,
