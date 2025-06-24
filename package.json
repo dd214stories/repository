@@ -1,0 +1,28 @@
+{
+  "name": "dd214-twilio-uploads",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "axios": "^1.10.0",
+    "dayjs": "^1.11.13",
+    "dotenv": "^16.5.0",
+    "express": "^4.18.4",
+    "googleapis": "^150.0.1",
+    "twilio": "^5.7.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dd214stories/repository.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dd214stories/repository/issues"
+  },
+  "homepage": "https://github.com/dd214stories/repository#readme",
+  "description": ""
+}
